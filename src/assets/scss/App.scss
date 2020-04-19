@@ -13,6 +13,8 @@
 
   --color-primary: var(--color-yellow);
 
+  --color-code: rgba(0, 122, 255, 0.4);
+
 }
 
 html.dark {
@@ -67,7 +69,10 @@ a:focus {
   color: inherit;
 }
 
-
+code {
+  background-color: var(--color-code);
+  padding: 4px 6px;
+}
 .App {
   width: 600px;
   max-width: 100%;
