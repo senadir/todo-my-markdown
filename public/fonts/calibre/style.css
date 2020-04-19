@@ -1,0 +1,10 @@
+@font-face {
+  font-family: Calibre;
+  src: url('calibre-test-bold.woff');
+  font-family: 700;
+}
+@font-face {
+  font-family: Calibre;
+  src: url('calibre-test-regular.woff');
+  font-family: 400;
+}

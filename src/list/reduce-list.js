@@ -4,19 +4,22 @@
 // so that we can keep track of them.
 // before rendering, we will turn this to an array and sort it.
 
-const reduceList = ( todos ) => todos.reduce( ( newTodos, todo ) => {
-	const {id, parent, ...cleanedTodo} = todo;
-	if (parent === null) {
-		return {...newTodos, [id]: cleanedTodo};
-	} else {
-		return {...newTodos, [parent]: {
-			...newTodos[parent],
-			todoChildren: {
-				...newTodos[parent]['todoChildren'],
-				[id]: cleanedTodo
-			}
-		} }
-	}
-}, {} );
+const reduceList = ( todos ) =>
+	todos.reduce( ( newTodos, todo ) => {
+		const { id, parent, ...cleanedTodo } = todo;
+		if ( parent === null ) {
+			return { ...newTodos, [ id ]: cleanedTodo };
+		}
+		return {
+			...newTodos,
+			[ parent ]: {
+				...newTodos[ parent ],
+				todoChildren: {
+					...newTodos[ parent ].todoChildren,
+					[ id ]: cleanedTodo,
+				},
+			},
+		};
+	}, {} );
 
 export default reduceList;

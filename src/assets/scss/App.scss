@@ -1,0 +1,255 @@
+:root {
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-heading: Calibre, var(--font-base);
+  --color-delete: rgb(255, 59, 48);
+
+  --color-border: rgba(0,0,0,0.1);
+
+  --color-base: #000;
+  --color-background: #fff;
+  --color-yellow: rgb(255, 204, 0);
+
+  --color-green: rgb(52, 199, 89);
+
+  --color-primary: var(--color-yellow);
+
+}
+
+html.dark {
+  --color-border: rgba(255,255,255, 0.1);
+  --color-base: #fff;
+  --color-background: #000;
+  --color-delete: rgb(255, 69, 58);
+  --color-yellow: rgb(255, 214, 10);
+  --color-green: rgb(48, 209, 88);
+
+}
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+body {
+  color: var(--color-base);
+  background-color: var(--color-background);
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-base);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  a {
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+a,
+a:visited,
+a:focus {
+  color: inherit;
+}
+
+
+.App {
+  width: 600px;
+  max-width: 100%;
+  padding: 0 16px;
+  margin: 64px auto;
+  position: relative;
+}
+
+.list-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.list__back {
+  font-size: 14px;
+  font-family: var(--font-base);
+  font-weight: normal;
+  cursor: pointer;
+  position: absolute;
+  top: -24px;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 8px;
+  }
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0;
+}
+.list-item__title,
+.list-title__item {
+  flex-grow: 1;
+  padding: 24px 0;
+}
+@mixin link-button() {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+  color: var(--color-base);
+	box-shadow: none;
+	display: inline;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	letter-spacing: inherit;
+	text-decoration: underline;
+	text-transform: none;
+	vertical-align: baseline;
+
+	background: transparent;
+	&:hover,
+	&:focus,
+	&:active {
+		background: transparent;
+	}
+}
+
+.button {
+  @include link-button();
+  font-size: 14px;
+  font-family: var(--font-base);
+  cursor: pointer;
+}
+
+.button--delete {
+  color: var(--color-delete);
+  margin-left: 24px;
+}
+
+.button--primary {
+  background-color: var(--color-primary);
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 2px;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--color-primary);
+  }
+}
+
+.dark .button--primary {
+  color: var(--color-background);
+}
+.todo-list {
+  margin: 16px 0;
+}
+.todo-item {
+  margin-bottom: 16px;
+  list-style: none;
+  input {
+    position: absolute; // take it out of document flow
+    opacity: 0; // hide it
+
+    & + label {
+      position: relative;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: line-through;
+      transition: all ease 300ms;
+      text-decoration-color: transparent;
+    }
+
+    // Box.
+    & + label:before {
+      content: '';
+      margin-right: 10px;
+      display: inline-block;
+      vertical-align: text-top;
+      width: 18px;
+      height: 18px;
+      background: transparent;
+      left: -30px;
+      top: 0;
+      position: absolute;
+      border: 1px solid var(--color-border);
+      transition: all ease 300ms;
+    }
+
+    // Box hover
+    &:hover + label:before {
+      border-color: var(--color-base);
+    }
+
+    // Box checked
+    &:checked + label:before {
+      background: var(--color-base);
+    }
+
+    // Checkmark. Could be replaced with an image
+    &:checked + label:after {
+      content: '';
+      position: absolute;
+      left: -23px;
+      top: 2px;
+      background: transparent;
+      width: 5px;
+      height: 10px;
+      border-bottom: 1px solid var(--color-background);
+      border-right: 1px solid var(--color-background);
+      transform: rotate(45deg);
+      transition: all ease 300ms;
+    }
+
+    &:checked + label {
+      text-decoration-color: var(--color-base);
+    }
+  }
+}
+
+.progress-badge {
+  font-size: 10px;
+  font-family: var(--font-base);
+  font-weight: normal;
+  background-color: var(--color-yellow);
+  margin-left: 16px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  .dark & {
+    color: var(--color-background)
+  }
+}
+
+.progress-badge__all-done {
+  background-color: var(--color-green);
+}
+
+.button--dark-mode {
+  text-decoration: none;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  font-size: 24px;
+}
+
+.button__dark-mode--checklist {
+  top: -30px
+}

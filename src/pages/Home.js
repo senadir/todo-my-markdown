@@ -1,17 +1,41 @@
-import React from 'react'
-import useLists from '../use-lists';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import useLists from '../use-lists';
+import ProgressBadge from '../ProgressBadge';
+import useDarkMode from '../use-dark-mode';
 
 export default function Home() {
 	const { lists, removeList } = useLists();
+	const ToggleDarkMode = useDarkMode();
+
 	return (
-		<div className='home'>
-			{lists.map(({title, id}) => (
-			<h2 key={ id }>
-				<Link to={`/checklist/${id}`}>{title}</Link>
-				<button onClick={() => removeList( id ) }>remove</button>
+		<>
+			<ToggleDarkMode />
+			<h1>Your Lists</h1>
+			{ lists.map( ( { title, id, todos } ) => (
+				<h2 className="list-item" key={ id }>
+					<Link
+						className="list-item__title"
+						to={ `/checklist/${ id }` }
+					>
+						{ title }
+						<ProgressBadge
+							left={
+								todos.filter( ( todo ) => ! todo.done ).length
+							}
+							total={ todos.length }
+						/>
+					</Link>
+					<div className="button-group list-actions">
+						<button
+							onClick={ () => removeList( id ) }
+							className="button button--delete"
+						>
+							Remove
+						</button>
+					</div>
 				</h2>
-			))}
-		</div>
-	)
+			) ) }
+		</>
+	);
 }

@@ -5,7 +5,7 @@ const saveList = ( { title, todos, sha, id } ) => {
 		title,
 		todos,
 		sha,
-	});
+	} );
 };
 
 export default saveList;

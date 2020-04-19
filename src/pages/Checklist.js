@@ -1,16 +1,46 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import Todo from '../Todo';
 import useTodos from '../use-todos';
+import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
+import useDarkMode from '../use-dark-mode';
 
 export default function Checklist() {
-	const { title, todos, updateTodo, removeList } = useTodos();
+	const { title, todos, updateTodo, removeList, resetList } = useTodos();
+	const ToggleDarkMode = useDarkMode();
+
 	return (
-		<div className='todoList'>
-			<h1>{ title }</h1>
-			<button onClick={ removeList }>Remove List</button>
-			<ul>
-				{ todos.map(todo => <Todo key={todo.id} {...todo} updateTodo={ updateTodo } />)}
+		<>
+			<ToggleDarkMode className="button__dark-mode--checklist" />
+			<h1 className="list-title">
+				<Link to="/" className="list__back">
+					<ArrowBack fill="currentColor" /> All Lists
+				</Link>
+				{ title }
+				<div className="button-group list-actions">
+					<button
+						className="button button--primary"
+						onClick={ resetList }
+					>
+						Reset All
+					</button>
+					<button
+						className="button button--delete"
+						onClick={ removeList }
+					>
+						Remove
+					</button>
+				</div>
+			</h1>
+			<ul className="todo-list">
+				{ todos.map( ( todo ) => (
+					<Todo
+						key={ todo.id }
+						{ ...todo }
+						updateTodo={ updateTodo }
+					/>
+				) ) }
 			</ul>
-		</div>
-	)
+		</>
+	);
 }
