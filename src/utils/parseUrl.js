@@ -6,7 +6,7 @@ const regex = /^https?:\/\/github.com\/([\w-]+\/[\w-]+)(?:\/[\w-]*\/?([\w-]+)\/(
 
 const parseUrl = ( url ) => {
 	if ( ! isUrl( url ) ) {
-		throw Error( `The url you passed is not valid: ${ url }` );
+		throw Error( 'The url you submitted is not valid.' );
 	}
 	if ( ! isGithub( url ) ) {
 		throw Error(

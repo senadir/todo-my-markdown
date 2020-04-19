@@ -123,7 +123,7 @@ a:focus {
 	text-decoration: underline;
 	text-transform: none;
 	vertical-align: baseline;
-
+  white-space: pre;
 	background: transparent;
 	&:hover,
 	&:focus,
@@ -141,7 +141,6 @@ a:focus {
 
 .button--delete {
   color: var(--color-delete);
-  margin-left: 24px;
 }
 
 .button--primary {
@@ -149,6 +148,7 @@ a:focus {
   padding: 8px 16px;
   text-decoration: none;
   border-radius: 2px;
+  margin-left: 24px;
   &:hover,
   &:focus,
   &:active {
@@ -252,4 +252,35 @@ a:focus {
 
 .button__dark-mode--checklist {
   top: -30px
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+}
+.create-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.create-list__label {
+  flex-basis: 100%;
+}
+
+.create-list__input {
+  flex-grow: 1;
+  margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	background: transparent;
+  line-height:1;
+  border: 1px solid var(--color-border);
+}
+
+
+.forme-errors {
+  flex-basis: 100%;
 }

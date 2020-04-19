@@ -19,16 +19,16 @@ export default function Checklist() {
 				{ title }
 				<div className="button-group list-actions">
 					<button
-						className="button button--primary"
-						onClick={ resetList }
-					>
-						Reset All
-					</button>
-					<button
 						className="button button--delete"
 						onClick={ removeList }
 					>
 						Remove
+					</button>
+					<button
+						className="button button--primary"
+						onClick={ resetList }
+					>
+						Reset All
 					</button>
 				</div>
 			</h1>

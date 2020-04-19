@@ -22,7 +22,7 @@ function App() {
 						<Route exact path="/">
 							<Home />
 						</Route>
-						<Route path="/create/:url(.*)">
+						<Route path="/create/:url(.*)?">
 							<Create />
 						</Route>
 						<Route path="/checklist/:id">
