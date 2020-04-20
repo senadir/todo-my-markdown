@@ -29,8 +29,17 @@ const parseList = ( file ) => {
 		.flat( Infinity )
 		.filter( Boolean )[ 1 ];
 	const todos = decodedLines
-		.filter( ( line ) => line.match( /- \[x| \]/g ) )
+		.filter( ( line ) => line.match( /- \[x\]|- \[ \]|<!-- heading -->/g ) )
 		.map( ( todo, index, allTodos ) => {
+			if ( todo.match( /<!-- heading -->/g ) ) {
+				return {
+					todo: todo.replace( /<!-- heading -->/g, '' ).trim(),
+					index, // needed to keep the sort correct.
+					id: hash( `${ todo }` ),
+					parent: null, // titles shouldn't have parents for now.
+					isTitle: true,
+				};
+			}
 			return {
 				todo: todo.replace( /- \[x\]|- \[ \]/g, '' ).trim(),
 				index, // needed to keep the sort correct.

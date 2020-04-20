@@ -1,9 +1,26 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import marked from 'marked';
-export default function Todo( { id, todo, done, todoChildren, updateTodo } ) {
+export default function Todo( {
+	id,
+	todo,
+	done,
+	todoChildren,
+	updateTodo,
+	isTitle,
+} ) {
 	const renderer = new marked.Renderer();
 	renderer.paragraph = ( text ) => text;
+	if ( isTitle ) {
+		return (
+			<p
+				className="todo-heading"
+				dangerouslySetInnerHTML={ {
+					__html: marked( todo, { renderer } ),
+				} }
+			></p>
+		);
+	}
 	return (
 		<li className="todo-item">
 			<input

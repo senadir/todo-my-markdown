@@ -6,12 +6,17 @@ import saveList from './save-list';
 const updateList = ( file ) => {
 	const { title, todos } = parseList( file );
 	db.getItem( hash( file.path ) ).then( ( { todos: oldTodos } ) => {
-		const newTodos = todos.map( ( todo ) => ( {
-			...todo,
-			done:
-				oldTodos?.find( ( oldTodo ) => oldTodo.id === todo.id ).done ??
-				todo.done,
-		} ) );
+		const newTodos = todos.map( ( todo ) => {
+			if ( todo.isTitle ) {
+				return todo;
+			}
+			return {
+				...todo,
+				done:
+					oldTodos?.find( ( oldTodo ) => oldTodo.id === todo.id )
+						.done ?? todo.done,
+			};
+		} );
 		return saveList( {
 			title,
 			todos: newTodos,

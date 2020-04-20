@@ -6,7 +6,7 @@ const prepareList = ( todos ) => {
 	reducedTodos = objectToArray( reducedTodos );
 	reducedTodos = sortArray( reducedTodos, 'index' );
 	reducedTodos = reducedTodos.map( ( todo ) => {
-		if ( todo.todoChildren === null ) {
+		if ( todo.todoChildren === null || todo.todoChildren === undefined ) {
 			return todo;
 		}
 		return {
