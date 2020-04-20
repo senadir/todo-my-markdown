@@ -83,7 +83,7 @@ code {
 
 .list-title {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   position: relative;
 }
@@ -251,13 +251,10 @@ code {
   text-decoration: none;
   position: absolute;
   right: 16px;
-  top: 16px;
+  top: -30px;
   font-size: 24px;
 }
 
-.button__dark-mode--checklist {
-  top: -30px
-}
 
 .button-group {
   display: flex;
@@ -283,6 +280,7 @@ code {
 	background: transparent;
   line-height:1;
   border: 1px solid var(--color-border);
+  color: var(--color-base)
 }
 
 

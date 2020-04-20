@@ -10,8 +10,15 @@ export default function Home() {
 
 	return (
 		<>
-			<ToggleDarkMode />
-			<h1>Your Lists</h1>
+			<h1 className="list-title">
+				<ToggleDarkMode />
+				Your Lists
+				<div className="button-group list-actions">
+					<Link className="button button--primary" to="/create">
+						Create a list
+					</Link>
+				</div>
+			</h1>
 			{ lists.map( ( { title, id, todos } ) => (
 				<h2 className="list-item" key={ id }>
 					<Link
