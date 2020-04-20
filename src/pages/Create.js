@@ -10,7 +10,12 @@ import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
 
 export default function Create() {
 	const { url: fetchedUrl } = useParams();
-	const [ url, setUrl ] = useState( fetchedUrl );
+	const [ url, setUrl ] = useState( () => {
+		const githubRef = isGithub( document.referrer )
+			? document.referrer
+			: '';
+		return fetchedUrl || githubRef;
+	} );
 	const [ file, setFile ] = useState( null );
 	const [ error, setError ] = useState( '' );
 	const throwError = useAsyncError();
