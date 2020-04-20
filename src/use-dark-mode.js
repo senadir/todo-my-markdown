@@ -29,7 +29,7 @@ export default function useDarkMode() {
 	const ToggleDarkMode = ( { className } ) => (
 		<button
 			className={ classnames( 'button button--dark-mode', className ) }
-			onClick={ () => persistDarkMode( ( mode ) => ! mode ) }
+			onClick={ () => persistDarkMode( ! isDarkMode ) }
 		>
 			<span aria-label="Toggle light mode" role="img">
 				{ isDarkMode ? '🌞' : '🌚' }
