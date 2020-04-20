@@ -28,9 +28,14 @@ export default function Home() {
 						{ title }
 						<ProgressBadge
 							left={
-								todos.filter( ( todo ) => ! todo.done ).length
+								todos.filter(
+									( todo ) => ! todo.done && ! todo.isTitle
+								).length
 							}
-							total={ todos.length }
+							total={
+								todos.filter( ( { isTitle } ) => ! isTitle )
+									.length
+							}
 						/>
 					</Link>
 					<div className="button-group list-actions">
