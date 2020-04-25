@@ -2,16 +2,17 @@
   "name": "checklist",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@theme-ui/presets": "^0.3.0",
     "@wordpress/eslint-plugin": "^5.0.1",
     "classnames": "^2.2.6",
     "js-sha1": "^0.6.0",
     "localforage": "^1.7.3",
-    "localforage-getitems": "^1.4.2",
     "marked": "^0.8.2",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
@@ -29,7 +30,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": ["react-app", "plugin:@wordpress/eslint-plugin/recommended"]
   },
   "browserslist": {
     "production": [
