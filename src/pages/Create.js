@@ -1,8 +1,13 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable jsdoc/check-tag-names */
+/** @jsx jsx */
+import { jsx, Heading, Input } from 'theme-ui';
+import { useEffect, useState, Fragment } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import hash from 'js-sha1';
-import useAsyncError from '../use-sync-error';
+import { Button, Stack } from '@nadir/components';
 import db from 'localforage';
+
+import useAsyncError from '../use-sync-error';
 import { isUrl, isGithub, parseUrl } from '../utils';
 import { createList, updateList } from '../list';
 import useDarkMode from '../use-dark-mode';
@@ -97,7 +102,7 @@ export default function Create() {
 		}
 	}, [ throwError, url ] );
 	return (
-		<>
+		<Fragment>
 			<h1 className="list-title">
 				<ToggleDarkMode />
 				<Link to="/" className="list__back">
@@ -106,20 +111,18 @@ export default function Create() {
 				Create A list
 			</h1>
 			<form className="create-list" onSubmit={ validateForm }>
-				<label htmlFor="url-input" className="create-list__label">
-					<h3>Enter the File Link</h3>
-				</label>
-				<input
-					type="url"
-					name="url"
-					defaultValue={ url }
-					className="create-list__input"
-				/>
-				<button className="button button--primary create-list__submit">
-					Create List
-				</button>
-				{ error && <p className="forme-errors">{ error }</p> }
+				<Stack direction="column" gap="normal">
+					<label htmlFor="url-input">
+						<Heading as="h3">Enter the File Link</Heading>
+					</label>
+					<Stack direction="row" gap="xsmall">
+						<Input type="url" name="url" defaultValue={ url } />
+						<Button variant="primary">Create List</Button>
+					</Stack>
+
+					{ error && <p className="forme-errors">{ error }</p> }
+				</Stack>
 			</form>
-		</>
+		</Fragment>
 	);
 }

@@ -1,16 +1,18 @@
+/* eslint-disable jsdoc/check-tag-names */
 import React from 'react';
+import { Badge } from '@nadir/components';
 
-export default function ProgressBadge( { left, total } ) {
-	if ( left === 0 ) {
-		return (
-			<span className="progress-badge progress-badge__all-done">
-				All { total } item done
-			</span>
-		);
-	}
+export default function ProgressBadge( { left, total, sx } ) {
+	const text =
+		left === 0
+			? `All ${ total } item done.`
+			: `${ left } left from ${ total }.`;
 	return (
-		<span className="progress-badge">
-			{ left } left from { total }.
-		</span>
+		<Badge
+			sx={ { ...sx, top: '2px', position: 'relative' } }
+			variant={ left === 0 ? 'done' : '' }
+		>
+			{ text }
+		</Badge>
 	);
 }

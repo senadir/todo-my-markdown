@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Checkbox, List } from '@nadir/components';
 import React from 'react';
 import marked from 'marked';
 export default function Todo( {
@@ -8,7 +9,9 @@ export default function Todo( {
 	todoChildren,
 	updateTodo,
 	isTitle,
+	level = 1,
 } ) {
+	// eslint-disable-next-line no-console
 	const renderer = new marked.Renderer();
 	renderer.paragraph = ( text ) => text;
 	if ( isTitle ) {
@@ -22,30 +25,29 @@ export default function Todo( {
 		);
 	}
 	return (
-		<li className="todo-item">
-			<input
-				type="checkbox"
-				id={ id }
-				checked={ done ? 'checked' : '' }
-				onChange={ () => updateTodo( id, ! done ) }
-			/>
-			<label
-				htmlFor={ id }
-				dangerouslySetInnerHTML={ {
-					__html: marked( todo, { renderer } ),
-				} }
-			></label>
+		<Checkbox
+			id={ id }
+			checked={ done }
+			onChange={ ( checked ) => {
+				updateTodo( id, checked );
+			} }
+			label={ marked( todo, { renderer } ) }
+		>
 			{ todoChildren && (
-				<ul className="todo-list">
+				<List
+					pl={ level > 0 ? 'normal' : 0 }
+					mt={ level > 0 ? 'normal' : 0 }
+				>
 					{ todoChildren.map( ( childTodo ) => (
 						<Todo
 							key={ childTodo.id }
 							{ ...childTodo }
 							updateTodo={ updateTodo }
+							level={ level + 1 }
 						/>
 					) ) }
-				</ul>
+				</List>
 			) }
-		</li>
+		</Checkbox>
 	);
 }

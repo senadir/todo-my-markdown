@@ -25,5 +25,9 @@
 	"files": [
 		"src"
 	],
-	"types": "types"
+	"types": "types",
+	"dependencies": {
+		"@emotion/styled": "^10.0.27",
+		"theme-ui": "^0.3.1"
+	}
 }

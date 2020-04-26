@@ -1,38 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useColorMode } from 'theme-ui';
 import classnames from 'classnames';
 
 export default function useDarkMode() {
-	const [ isDarkMode, setIsDarkMode ] = useState( () => {
-		return (
-			JSON.parse( localStorage.getItem( 'isDarkMode' ) ) ??
-			( window.matchMedia &&
-				window.matchMedia( '(prefers-color-scheme: dark)' ).matches )
-		);
-	} );
+	const [ colorMode, setColorMode ] = useColorMode();
 
-	useEffect( () => {
-		if ( isDarkMode ) {
-			document.documentElement.classList.add( 'dark' );
-		} else {
+	const toggleDarkMode = () => {
+		setColorMode( colorMode === 'default' ? 'dark' : 'default' );
+		if ( colorMode === 'dark' ) {
 			document.documentElement.classList.remove( 'dark' );
+		} else {
+			document.documentElement.classList.add( 'dark' );
 		}
-	}, [ isDarkMode ] );
-
-	const persistDarkMode = ( mode ) => {
-		localStorage.setItem( 'isDarkMode', mode );
-		setIsDarkMode( mode );
 	};
-	window.matchMedia( '(prefers-color-scheme: dark)' ).addListener( ( e ) => {
-		JSON.parse( localStorage.getItem( 'isDarkMode' ) ) ??
-			setIsDarkMode( !! e.matches );
-	} );
+
 	const ToggleDarkMode = ( { className } ) => (
 		<button
 			className={ classnames( 'button button--dark-mode', className ) }
-			onClick={ () => persistDarkMode( ! isDarkMode ) }
+			onClick={ () => toggleDarkMode() }
 		>
 			<span aria-label="Toggle light mode" role="img">
-				{ isDarkMode ? '🌞' : '🌚' }
+				{ colorMode === 'default' ? '🌞' : '🌚' }
 			</span>
 		</button>
 	);

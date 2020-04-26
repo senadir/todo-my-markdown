@@ -23,7 +23,7 @@ html.dark {
   --color-background: #000;
   --color-delete: rgb(255, 69, 58);
   --color-yellow: rgb(255, 214, 10);
-  --color-green: rgb(48, 209, 88);
+  --color-green: #30d158;
 
 }
 html {
@@ -44,24 +44,11 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
-  font-weight: 700;
   a {
     text-decoration: none;
   }
 }
 
-h1 {
-  font-size: 42px;
-}
-
-h2 {
-  font-size: 32px;
-}
-
-h3 {
-  font-size: 28px;
-}
 
 a,
 a:visited,
@@ -69,10 +56,6 @@ a:focus {
   color: inherit;
 }
 
-code {
-  background-color: var(--color-code);
-  padding: 4px 6px;
-}
 .App {
   width: 600px;
   max-width: 100%;
@@ -114,11 +97,11 @@ code {
   padding: 24px 0;
 }
 @mixin link-button() {
+  color: var(--color-base);
 	margin: 0;
 	padding: 0;
 	border: 0;
 	border-radius: 0;
-  color: var(--color-base);
 	box-shadow: none;
 	display: inline;
 	font-family: inherit;
@@ -144,91 +127,8 @@ code {
   cursor: pointer;
 }
 
-.button--delete {
-  color: var(--color-delete);
-}
 
-.button--primary {
-  background-color: var(--color-primary);
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 2px;
-  margin-left: 24px;
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: var(--color-primary);
-  }
-}
 
-.dark .button--primary {
-  color: var(--color-background);
-}
-.todo-list {
-  margin: 16px 0;
-}
-.todo-item {
-  margin-bottom: 16px;
-  list-style: none;
-  input {
-    position: absolute; // take it out of document flow
-    opacity: 0; // hide it
-
-    & + label {
-      position: relative;
-      cursor: pointer;
-      padding: 0;
-      text-decoration: line-through;
-      transition: all ease 300ms;
-      text-decoration-color: transparent;
-    }
-
-    // Box.
-    & + label:before {
-      content: '';
-      margin-right: 10px;
-      display: inline-block;
-      vertical-align: text-top;
-      width: 18px;
-      height: 18px;
-      background: transparent;
-      left: -30px;
-      top: 0;
-      position: absolute;
-      border: 1px solid var(--color-border);
-      transition: all ease 300ms;
-    }
-
-    // Box hover
-    &:hover + label:before {
-      border-color: var(--color-base);
-    }
-
-    // Box checked
-    &:checked + label:before {
-      background: var(--color-base);
-    }
-
-    // Checkmark. Could be replaced with an image
-    &:checked + label:after {
-      content: '';
-      position: absolute;
-      left: -23px;
-      top: 2px;
-      background: transparent;
-      width: 5px;
-      height: 10px;
-      border-bottom: 1px solid var(--color-background);
-      border-right: 1px solid var(--color-background);
-      transform: rotate(45deg);
-      transition: all ease 300ms;
-    }
-
-    &:checked + label {
-      text-decoration-color: var(--color-base);
-    }
-  }
-}
 
 .progress-badge {
   font-size: 10px;
@@ -238,6 +138,8 @@ code {
   margin-left: 16px;
   padding: 4px 8px;
   border-radius: 100px;
+  top: -2px;
+  position: relative;
   .dark & {
     color: var(--color-background)
   }
@@ -250,7 +152,7 @@ code {
 .button--dark-mode {
   text-decoration: none;
   position: absolute;
-  right: 16px;
+  right: 0;
   top: -30px;
   font-size: 24px;
 }
@@ -260,36 +162,28 @@ code {
   display: flex;
   align-items: center;
 }
-.create-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.create-list__label {
-  flex-basis: 100%;
-}
-
-.create-list__input {
-  flex-grow: 1;
-  margin:0;
-	border:0;
-	padding:0;
-	display:inline-block;
-	vertical-align:middle;
-	white-space:normal;
-	background: transparent;
-  line-height:1;
-  border: 1px solid var(--color-border);
-  color: var(--color-base)
-}
-
 
 .forme-errors {
   flex-basis: 100%;
 }
 
 .todo-heading {
-  margin-left: -28px;
   font-size: 20px;
   margin-top: 32px;
+}
+
+.layout {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.layout--inline {
+  flex-direction: row;
+  > * {
+    margin-right: 8px !important;
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
 }

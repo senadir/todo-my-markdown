@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button, List } from '@nadir/components';
 import Todo from '../Todo';
 import useTodos from '../use-todos';
 import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
@@ -11,28 +12,22 @@ export default function Checklist() {
 
 	return (
 		<>
-			<ToggleDarkMode className="button__dark-mode--checklist" />
 			<h1 className="list-title">
+				<ToggleDarkMode />
 				<Link to="/" className="list__back">
 					<ArrowBack fill="currentColor" /> All Lists
 				</Link>
 				{ title }
-				<div className="button-group list-actions">
-					<button
-						className="button button--delete"
-						onClick={ removeList }
-					>
+				<div className="layout layout--inline">
+					<Button variant="error.inline" onClick={ removeList }>
 						Remove
-					</button>
-					<button
-						className="button button--primary"
-						onClick={ resetList }
-					>
+					</Button>
+					<Button variant="primary.inline" onClick={ resetList }>
 						Reset All
-					</button>
+					</Button>
 				</div>
 			</h1>
-			<ul className="todo-list">
+			<List>
 				{ todos.map( ( todo ) => (
 					<Todo
 						key={ todo.id }
@@ -40,7 +35,7 @@ export default function Checklist() {
 						updateTodo={ updateTodo }
 					/>
 				) ) }
-			</ul>
+			</List>
 		</>
 	);
 }

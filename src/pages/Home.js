@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button, Stack } from '@nadir/components';
 import useLists from '../use-lists';
 import ProgressBadge from '../ProgressBadge';
 import useDarkMode from '../use-dark-mode';
@@ -14,9 +15,9 @@ export default function Home() {
 				<ToggleDarkMode />
 				Your Lists
 				<div className="button-group list-actions">
-					<Link className="button button--primary" to="/create">
-						Create a list
-					</Link>
+					<Button variant="primary">
+						<Link to="/create">Create a list</Link>
+					</Button>
 				</div>
 			</h1>
 			{ lists.map( ( { title, id, todos } ) => (
@@ -25,26 +26,29 @@ export default function Home() {
 						className="list-item__title"
 						to={ `/checklist/${ id }` }
 					>
-						{ title }
-						<ProgressBadge
-							left={
-								todos.filter(
-									( todo ) => ! todo.done && ! todo.isTitle
-								).length
-							}
-							total={
-								todos.filter( ( { isTitle } ) => ! isTitle )
-									.length
-							}
-						/>
+						<Stack direction="row" align="center" gap="xsmall">
+							{ title }
+							<ProgressBadge
+								left={
+									todos.filter(
+										( todo ) =>
+											! todo.done && ! todo.isTitle
+									).length
+								}
+								total={
+									todos.filter( ( { isTitle } ) => ! isTitle )
+										.length
+								}
+							/>
+						</Stack>
 					</Link>
 					<div className="button-group list-actions">
-						<button
+						<Button
 							onClick={ () => removeList( id ) }
-							className="button button--delete"
+							variant="error.inline"
 						>
-							Remove
-						</button>
+							Delete
+						</Button>
 					</div>
 				</h2>
 			) ) }
