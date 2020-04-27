@@ -30,12 +30,6 @@
     "test": "craco test",
     "eject": "craco eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "plugin:@wordpress/eslint-plugin/recommended"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
