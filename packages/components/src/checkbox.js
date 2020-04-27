@@ -1,40 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import { createElement } from 'react';
-/**
- *
- * .todo-item {
-  input {
- 
-    & + label {
- 
-    }
- 
-    // Box.
-    & + label:before {
- 
-    }
- 
-    // Box hover
-    &:hover + label:before {
-    }
- 
-    // Box checked
-    &:checked + label:before {
-    }
- 
-    // Checkmark. Could be replaced with an image
-    &:checked + label:after {
-      content: '';
- 
-    }
- 
-    &:checked + label {
-    }
-  }
-}
- */
 
 export default function Checkbox( { id, checked, onChange, label, children } ) {
 	return (

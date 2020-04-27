@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/check-tag-names */
 /** @jsx jsx */
 import { jsx, Heading, Input } from 'theme-ui';
 import { useEffect, useState, Fragment } from 'react';

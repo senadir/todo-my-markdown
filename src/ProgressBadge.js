@@ -1,5 +1,5 @@
-/* eslint-disable jsdoc/check-tag-names */
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from 'theme-ui';
 import { Badge } from '@nadir/components';
 
 export default function ProgressBadge( { left, total, sx } ) {

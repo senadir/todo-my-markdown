@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Checkbox, List } from '@nadir/components';
 import React from 'react';
 import marked from 'marked';
@@ -11,7 +10,6 @@ export default function Todo( {
 	isTitle,
 	level = 1,
 } ) {
-	// eslint-disable-next-line no-console
 	const renderer = new marked.Renderer();
 	renderer.paragraph = ( text ) => text;
 	if ( isTitle ) {

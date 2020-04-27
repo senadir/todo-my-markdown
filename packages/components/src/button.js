@@ -1,4 +1,3 @@
-/* eslint-disable jsdoc/check-tag-names */
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
 import classnames from 'classnames';
