@@ -9,14 +9,17 @@ export default function Todo( {
 	isTitle,
 	level = 1,
 } ) {
-	const codeParser = ( str ) =>
-		str.replace( /`([^`]*)`/g, '<code>$1</code>' );
+	const mdParser = ( str ) =>
+		str
+			.replace( /`([^`]*)`/g, '<code>$1</code>' )
+			.replace( /\*\*([^\*\*]*)\*\*/g, '<strong>$1</strong>' ) //bold before italic
+			.replace( /\*([^\*]*)\*/g, '<em>$1</em>' );
 	if ( isTitle ) {
 		return (
 			<p
 				className="todo-heading"
 				dangerouslySetInnerHTML={ {
-					__html: codeParser( todo ),
+					__html: mdParser( todo ),
 				} }
 			></p>
 		);
@@ -28,7 +31,7 @@ export default function Todo( {
 			onChange={ ( checked ) => {
 				updateTodo( id, checked );
 			} }
-			label={ codeParser( todo ) }
+			label={ mdParser( todo ) }
 		>
 			{ todoChildren && (
 				<List
