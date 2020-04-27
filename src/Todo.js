@@ -12,8 +12,8 @@ export default function Todo( {
 	const mdParser = ( str ) =>
 		str
 			.replace( /`([^`]*)`/g, '<code>$1</code>' )
-			.replace( /\*\*([^\*\*]*)\*\*/g, '<strong>$1</strong>' ) //bold before italic
-			.replace( /\*([^\*]*)\*/g, '<em>$1</em>' );
+			.replace( /\*\*([^**]*)\*\*/g, '<strong>$1</strong>' ) //bold before italic
+			.replace( /\*([^*]*)\*/g, '<em>$1</em>' );
 	if ( isTitle ) {
 		return (
 			<p
