@@ -74,7 +74,6 @@ const base = {
 	badges: {
 		done: {
 			bg: 'highlight',
-			color: '#000',
 		},
 	},
 	buttons: {
@@ -115,9 +114,6 @@ const base = {
 				fontFamily: 'body',
 				fontWeight: 'body',
 				lineHeight: 'body',
-			},
-			a: {
-				color: 'primary',
 			},
 			pre: {
 				fontFamily: 'monospace',

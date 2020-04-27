@@ -10,6 +10,7 @@ export default function Badge( { sx, variant, children } ) {
 				borderRadius: 'circle',
 				fontSize: '10px',
 				bg: 'warning',
+				color: '#000',
 				variant: `badges.${ variant }`,
 				...sx,
 			} }

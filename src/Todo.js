@@ -1,6 +1,5 @@
 import { Checkbox, List } from '@nadir/components';
 import React from 'react';
-import marked from 'marked';
 export default function Todo( {
 	id,
 	todo,
@@ -10,14 +9,14 @@ export default function Todo( {
 	isTitle,
 	level = 1,
 } ) {
-	const renderer = new marked.Renderer();
-	renderer.paragraph = ( text ) => text;
+	const codeParser = ( str ) =>
+		str.replace( /`([^`]*)`/g, '<code>$1</code>' );
 	if ( isTitle ) {
 		return (
 			<p
 				className="todo-heading"
 				dangerouslySetInnerHTML={ {
-					__html: marked( todo, { renderer } ),
+					__html: codeParser( todo ),
 				} }
 			></p>
 		);
@@ -29,7 +28,7 @@ export default function Todo( {
 			onChange={ ( checked ) => {
 				updateTodo( id, checked );
 			} }
-			label={ marked( todo, { renderer } ) }
+			label={ codeParser( todo ) }
 		>
 			{ todoChildren && (
 				<List
