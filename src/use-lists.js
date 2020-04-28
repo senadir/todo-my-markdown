@@ -5,10 +5,11 @@ const useLists = () => {
 	const [ lists, setLists ] = useState( [] );
 	useEffect( () => {
 		db.iterate( ( value, key ) => {
-			setLists( ( list ) => [
-				...list,
-				{ title: value.title, id: key, todos: value.todos },
-			] );
+			!! value.title &&
+				setLists( ( list ) => [
+					...list,
+					{ title: value.title, id: key, todos: value.todos },
+				] );
 		} );
 	}, [] );
 	const removeLocalList = ( id ) => {

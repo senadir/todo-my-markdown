@@ -18,21 +18,24 @@ export default function Stack( { direction, align, gap, children = [] } ) {
 			} }
 		>
 			{ children.map( ( c, i, arr ) => {
-				if ( arr.length - 1 === i ) {
-					return c;
-				}
-				if ( typeof c === 'string' ) {
-					return (
-						<Text key={ i } { ...gapProp }>
-							{ c }
-						</Text>
-					);
-				}
+				if ( c ) {
+					if ( arr.length - 1 === i ) {
+						return c;
+					}
+					if ( typeof c === 'string' ) {
+						return (
+							<Text key={ i } { ...gapProp }>
+								{ c }
+							</Text>
+						);
+					}
 
-				return cloneElement( c, {
-					style: { ...gapProp },
-					key: c.props.key || i,
-				} );
+					return cloneElement( c, {
+						style: { ...gapProp },
+						key: c?.props?.key || i,
+					} );
+				}
+				return null;
 			} ) }
 		</Flex>
 	);

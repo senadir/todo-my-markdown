@@ -23,11 +23,12 @@ const parseList = ( file ) => {
 		.atob( file.content )
 		.split( '\n' )
 		.filter( Boolean );
-	const title = decodedLines
-		.filter( ( line ) => line.match( '#' ) )
-		.map( ( line ) => [ ...line.matchAll( titleRegex ) ] )
-		.flat( Infinity )
-		.filter( Boolean )[ 1 ];
+	const title =
+		decodedLines
+			.filter( ( line ) => line.match( '#' ) )
+			.map( ( line ) => [ ...line.matchAll( titleRegex ) ] )
+			.flat( Infinity )
+			.filter( Boolean )[ 1 ] || file.name;
 	const todos = decodedLines
 		.filter( ( line ) => line.match( /- \[x\]|- \[ \]|<!-- heading -->/g ) )
 		.map( ( todo, index, allTodos ) => {
@@ -49,7 +50,9 @@ const parseList = ( file ) => {
 				todoChildren: null,
 			};
 		} );
+	const url = file.url;
 	return {
+		url,
 		title,
 		todos,
 	};
