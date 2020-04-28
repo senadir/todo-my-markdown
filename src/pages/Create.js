@@ -1,23 +1,23 @@
 /** @jsx jsx */
 import { jsx, Heading, Input } from 'theme-ui';
 import { useEffect, useState, Fragment } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import hash from 'js-sha1';
+import { useParams, useHistory, Link } from 'react-router-dom';
+import * as hash from 'js-sha1';
 import { Button, Stack } from '@nadir/components';
-import db from 'localforage';
 
 import useAsyncError from '../use-sync-error';
 import { isUrl, isGithub, parseUrl } from '../utils';
-import { createList, updateList } from '../list';
+import { createList, updateList, getList, parseList } from '../list';
 import useDarkMode from '../use-dark-mode';
 import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
 
 export default function Create() {
 	const { url: fetchedUrl } = useParams();
+	const history = useHistory();
 	const [ url, setUrl ] = useState( () => {
 		const githubRef = isGithub( document.referrer )
 			? document.referrer
-			: '';
+			: null;
 		return fetchedUrl || githubRef;
 	} );
 	const [ file, setFile ] = useState( null );
@@ -42,29 +42,43 @@ export default function Create() {
 	};
 	useEffect( () => {
 		if ( file ) {
-			db.getItem( hash( file.path ) )
+			getList( hash( file.path ) )
 				.then( ( checklist ) => {
 					if ( checklist.sha === file.sha ) {
-						window.location.replace(
-							`/checklist/${ hash( file.path ) }`
-						);
+						history.push( `/checklist/${ hash( file.path ) }` );
 					} else {
-						updateList( file ).then( () => {
-							window.location.replace(
-								`/checklist/${ hash( file.path ) }`
+						const { title, todos, url: fileUrl } = parseList(
+							file
+						);
+						if ( todos.length === 0 ) {
+							return setError(
+								'The file you provided has no todos in it.'
 							);
-						} );
+						}
+						updateList( file, { title, todos, url: fileUrl } ).then(
+							() => {
+								history.push(
+									`/checklist/${ hash( file.path ) }`
+								);
+							}
+						);
 					}
 				} )
 				.catch( () => {
-					createList( file ).then( () => {
-						window.location.replace(
-							`/checklist/${ hash( file.path ) }`
+					const { title, todos, url: fileUrl } = parseList( file );
+					if ( todos.length === 0 ) {
+						return setError(
+							'The file you provided has no todos in it.'
 						);
-					} );
+					}
+					createList( file, { title, todos, url: fileUrl } ).then(
+						() => {
+							history.push( `/checklist/${ hash( file.path ) }` );
+						}
+					);
 				} );
 		}
-	}, [ file ] );
+	}, [ file, history, url ] );
 	useEffect( () => {
 		if ( url ) {
 			let parseLinked;
@@ -79,7 +93,7 @@ export default function Create() {
 				return fetch( urlToFetch )
 					.then( ( res ) => {
 						if ( res.status > 201 ) {
-							setError( 'File could not be found' );
+							return setError( 'File could not be found' );
 						}
 						return res.json();
 					} )

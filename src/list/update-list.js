@@ -1,10 +1,8 @@
 import db from 'localforage';
 import hash from 'js-sha1';
-import parseList from './parse-list';
 import saveList from './save-list';
 
-const updateList = ( file ) => {
-	const { title, todos } = parseList( file );
+const updateList = ( file, { title, todos, url } ) => {
 	db.getItem( hash( file.path ) ).then( ( { todos: oldTodos } ) => {
 		const newTodos = todos.map( ( todo ) => {
 			if ( todo.isTitle ) {
@@ -22,6 +20,7 @@ const updateList = ( file ) => {
 			todos: newTodos,
 			id: hash( file.path ),
 			sha: file.sha,
+			url,
 		} );
 	} );
 };

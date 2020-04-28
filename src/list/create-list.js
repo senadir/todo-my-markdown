@@ -1,14 +1,13 @@
 import hash from 'js-sha1';
-import parseList from './parse-list';
 import saveList from './save-list';
 
-const createList = ( file ) => {
-	const { title, todos } = parseList( file );
+const createList = ( file, { title, todos, url } ) => {
 	return saveList( {
 		title,
 		todos,
 		id: hash( file.path ),
 		sha: file.sha,
+		url,
 	} );
 };
 
