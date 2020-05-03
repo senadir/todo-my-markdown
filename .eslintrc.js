@@ -5,6 +5,7 @@ module.exports = {
 	],
 	rules: {
 		'jsdoc/check-tag-names': 'off',
-		'no-console': 'warn'
+		'no-console': 'warn',
+		'no-unused-vars': 'warn'
 	}
 }

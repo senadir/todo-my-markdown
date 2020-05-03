@@ -8,6 +8,7 @@ import { Button, Stack } from '@nadir/components';
 import useAsyncError from '../use-sync-error';
 import { isUrl, isGithub, parseUrl } from '../utils';
 import { createList, updateList, getList, parseList } from '../list';
+import { fetchFile } from '../data';
 import useDarkMode from '../use-dark-mode';
 import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
 
@@ -20,6 +21,7 @@ export default function Create() {
 			: null;
 		return fetchedUrl || githubRef;
 	} );
+	const [ preloaded, setPreloaded ] = useState( !! url );
 	const [ file, setFile ] = useState( null );
 	const [ error, setError ] = useState( '' );
 	const throwError = useAsyncError();
@@ -81,39 +83,26 @@ export default function Create() {
 	}, [ file, history, url ] );
 	useEffect( () => {
 		if ( url ) {
-			let parseLinked;
 			try {
-				parseLinked = parseUrl( url );
+				const { repo, path = '', ref = 'master' } = parseUrl( url );
+				const link = `https://api.github.com/repos/${ repo }/contents/${ path }?ref=${ ref }`;
+				fetchFile( link )
+					.then( ( res ) => setFile( res ) )
+					.catch( ( e ) => setError( e.message ) );
 			} catch ( e ) {
 				return setError( e.message );
 			}
-			const { repo, path = '', ref = 'master' } = parseLinked;
-			const link = `https://api.github.com/repos/${ repo }/contents/${ path }?ref=${ ref }`;
-			const fetchFile = ( urlToFetch ) => {
-				return fetch( urlToFetch )
-					.then( ( res ) => {
-						if ( res.status > 201 ) {
-							return setError( 'File could not be found' );
-						}
-						return res.json();
-					} )
-					.then( ( res ) => {
-						if ( Array.isArray( res ) ) {
-							res = res.filter(
-								( document ) =>
-									document.name.toUpperCase() === 'README.MD'
-							)[ 0 ];
-							return fetchFile( res.url );
-						}
-						setFile( res );
-					} )
-					.catch( ( e ) => {
-						setError( e.message );
-					} );
-			};
-			fetchFile( link );
 		}
 	}, [ throwError, url ] );
+
+	useEffect( () => {
+		if ( error && preloaded ) {
+			setPreloaded( false );
+		}
+	}, [ error, preloaded ] );
+	if ( preloaded ) {
+		return null;
+	}
 	return (
 		<Fragment>
 			<h1 className="list-title">

@@ -15,8 +15,8 @@ export default function Home() {
 				<ToggleDarkMode />
 				Your Lists
 				<div className="button-group list-actions">
-					<Button variant="primary">
-						<Link to="/create">Create a list</Link>
+					<Button as={ Link } variant="primary" to="/create">
+						Create a list
 					</Button>
 				</div>
 			</h1>

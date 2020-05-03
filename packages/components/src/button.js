@@ -5,12 +5,12 @@ import classnames from 'classnames';
 export default function Button( {
 	className,
 	children,
+	as: Tag = 'button',
 	variant = 'primary',
 	...props
 } ) {
 	return (
-		<button
-			{ ...props }
+		<Tag
 			className={ classnames( className, {
 				[ `is-${ variant }` ]: variant,
 			} ) }
@@ -23,6 +23,8 @@ export default function Button( {
 				height: 'large',
 				boxShadow: 'none',
 				display: 'inline-flex',
+				alignItems: 'center',
+				justifyContent: 'center',
 				fontFamily: 'inherit',
 				fontSize: 1,
 				fontWeight: 'body',
@@ -35,8 +37,9 @@ export default function Button( {
 				cursor: 'pointer',
 				variant: `buttons.${ variant }`,
 			} }
+			{ ...props }
 		>
 			{ children }
-		</button>
+		</Tag>
 	);
 }
