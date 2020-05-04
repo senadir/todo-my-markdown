@@ -1,23 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Stack } from '@nadir/components';
-import { useLists, useDarkMode } from '../hooks';
+import { Stack } from '@nadir/components';
+import { useDarkMode } from '../hooks';
 import ProgressBadge from '../ProgressBadge';
+import demoContent from '../demo';
 
 export default function Home() {
-	const { lists, removeList } = useLists();
+	const lists = demoContent;
 	const ToggleDarkMode = useDarkMode();
-
+	console.log( JSON.stringify( lists[ 0 ] ) );
 	return (
 		<>
 			<div className="list">
 				<ToggleDarkMode />
 				<h1 className="list__title">Your Lists</h1>
-				<div className="button-group list-actions">
-					<Button as={ Link } variant="primary" to="/create">
-						Create a list
-					</Button>
-				</div>
 			</div>
 			{ lists.map( ( { title, id, todos } ) => (
 				<h2 className="list-item" key={ id }>
@@ -41,14 +37,6 @@ export default function Home() {
 							/>
 						</Stack>
 					</Link>
-					<div className="button-group list-actions">
-						<Button
-							onClick={ () => removeList( id ) }
-							variant="error.inline"
-						>
-							Delete
-						</Button>
-					</div>
 				</h2>
 			) ) }
 		</>

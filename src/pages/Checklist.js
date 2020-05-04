@@ -18,9 +18,6 @@ export default function Checklist() {
 				</Link>
 				<h1 className="list__title">{ title }</h1>
 				<div className="layout layout--inline">
-					<Button variant="error.inline" onClick={ removeList }>
-						Remove
-					</Button>
 					<Button variant="primary.inline" onClick={ resetList }>
 						Reset All
 					</Button>
