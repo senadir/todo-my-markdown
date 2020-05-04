@@ -11,6 +11,14 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 				position: 'relative',
 			} }
 		>
+			<input
+				sx={ { position: 'absolute', opacity: 0 } }
+				tabIndex={ -1 }
+				type="checkbox"
+				id={ id }
+				checked={ checked ? 'checked' : '' }
+				onChange={ ( e ) => onChange( e.target.checked ) }
+			/>
 			<label
 				htmlFor={ id }
 				sx={ {
@@ -34,7 +42,7 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 			</label>
 			<div
 				aria-hidden="true"
-				tabIndex={ -1 }
+				tabIndex={ 0 }
 				sx={ {
 					display: 'inline-block',
 					verticalAlign: 'text-top',
@@ -48,20 +56,13 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 					borderColor: 'primary',
 					transition: 'all ease 300ms',
 					outline: '1px solid transparent',
-					'label:hover + &': {
+					'label:hover + &, &:focus': {
 						boxShadow: ( theme ) =>
 							! checked &&
 							`0 0 3px 0px ${ theme.colors.primary }`,
 					},
 				} }
 			></div>
-			<input
-				sx={ { position: 'absolute', opacity: 0 } }
-				type="checkbox"
-				id={ id }
-				checked={ checked ? 'checked' : '' }
-				onChange={ ( e ) => onChange( e.target.checked ) }
-			/>
 			<svg
 				aria-hidden="true"
 				sx={ {

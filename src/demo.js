@@ -16,7 +16,7 @@ export default [
 				index: 1,
 				id: '2a53370c236fb0930bd5c5b8f18577412be47401',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -39,7 +39,7 @@ export default [
 				index: 4,
 				id: 'aa17c87a24da007fd095aed9a3231d42c49b04d0',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -47,7 +47,7 @@ export default [
 				index: 5,
 				id: '502f6f58b158c1d9e0d4b27ad16164752473dada',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -55,7 +55,7 @@ export default [
 				index: 6,
 				id: 'ca473f001655e2554b72be94a95dc4e8d50c7ddb',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -63,7 +63,7 @@ export default [
 				index: 7,
 				id: '9fbf5f190c76c7250f30354aeea6b1f91eb07bd2',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -72,7 +72,7 @@ export default [
 				index: 8,
 				id: 'c15fbd942ce8410a124f0db2d1c4f42b6c333fd3',
 				parent: '9fbf5f190c76c7250f30354aeea6b1f91eb07bd2',
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -81,7 +81,7 @@ export default [
 				index: 9,
 				id: '68547973d6739d140172516669a18531213cc5e5',
 				parent: '9fbf5f190c76c7250f30354aeea6b1f91eb07bd2',
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -90,7 +90,7 @@ export default [
 				index: 10,
 				id: 'f049b0ecfc9944db3d42aaf31db67b78476c5150',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -99,7 +99,7 @@ export default [
 				index: 11,
 				id: 'c3e6b73d6f097726d169114cdfc2e9be333e0953',
 				parent: 'f049b0ecfc9944db3d42aaf31db67b78476c5150',
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -108,7 +108,7 @@ export default [
 				index: 12,
 				id: '4bb347468a21af152084c469383401f89cf07714',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -117,7 +117,7 @@ export default [
 				index: 13,
 				id: '79b13e1fd38d1d1f0c6d34e986dd5929e27012fb',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 			{
@@ -126,7 +126,7 @@ export default [
 				index: 14,
 				id: 'ecfe7e6617cb3add69cd095a92ace26495bd4b4c',
 				parent: null,
-				done: true,
+				done: false,
 				todoChildren: null,
 			},
 		],
