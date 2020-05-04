@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@wordpress/eslint-plugin": "^5.0.1",
     "classnames": "^2.2.6",
+    "js-base64": "^2.5.2",
     "js-sha1": "^0.6.0",
     "localforage": "^1.7.3",
     "node-sass": "^4.13.1",
@@ -40,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "history": "^4.10.1",
+    "puppeteer": "^3.0.2",
+    "react-router": "^5.1.2"
   }
 }

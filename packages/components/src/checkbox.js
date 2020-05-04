@@ -4,23 +4,37 @@ import { createElement } from 'react';
 
 export default function Checkbox( { id, checked, onChange, label, children } ) {
 	return (
-		<li
+		<div
 			sx={ {
-				listStyle: 'none',
 				mb: 'xsmall',
 				pl: 'medium',
 				position: 'relative',
 			} }
 		>
-			<input
-				sx={ { position: 'absolute', opacity: 0 } }
-				type="checkbox"
-				id={ id }
-				checked={ checked ? 'checked' : '' }
-				onChange={ ( e ) => onChange( e.target.checked ) }
-			/>
+			<label
+				htmlFor={ id }
+				sx={ {
+					position: 'relative',
+					cursor: 'pointer',
+					textDecoration: 'line-through',
+					transition: 'all ease 300ms',
+					'&:focus': {
+						outline: ( theme ) =>
+							`1px solid ${ theme.colors.text }`,
+					},
+					textDecorationColor: checked ? 'text' : 'transparent',
+					code: {
+						textDecoration: checked ? 'line-through' : 'none',
+					},
+				} }
+			>
+				{ createElement( 'span', {
+					dangerouslySetInnerHTML: { __html: label },
+				} ) }
+			</label>
 			<div
 				aria-hidden="true"
+				tabIndex={ -1 }
 				sx={ {
 					display: 'inline-block',
 					verticalAlign: 'text-top',
@@ -34,13 +48,20 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 					borderColor: 'primary',
 					transition: 'all ease 300ms',
 					outline: '1px solid transparent',
-					'li:hover &': {
+					'label:hover + &': {
 						boxShadow: ( theme ) =>
 							! checked &&
 							`0 0 3px 0px ${ theme.colors.primary }`,
 					},
 				} }
 			></div>
+			<input
+				sx={ { position: 'absolute', opacity: 0 } }
+				type="checkbox"
+				id={ id }
+				checked={ checked ? 'checked' : '' }
+				onChange={ ( e ) => onChange( e.target.checked ) }
+			/>
 			<svg
 				aria-hidden="true"
 				sx={ {
@@ -57,26 +78,8 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 				<path d="M0 0h24v24H0z" fill="none" />
 				<path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
 			</svg>
-
-			<label
-				htmlFor={ id }
-				sx={ {
-					position: 'relative',
-					cursor: 'pointer',
-					textDecoration: 'line-through',
-					transition: 'all ease 300ms',
-					textDecorationColor: checked ? 'text' : 'transparent',
-					code: {
-						textDecoration: checked ? 'line-through' : 'none',
-					},
-				} }
-			>
-				{ createElement( 'span', {
-					dangerouslySetInnerHTML: { __html: label },
-				} ) }
-			</label>
 			{ children }
-		</li>
+		</div>
 	);
 }
 

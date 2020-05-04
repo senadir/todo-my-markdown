@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, List } from '@nadir/components';
 import Todo from '../Todo';
-import useTodos from '../use-todos';
+import { useTodos, useDarkMode } from '../hooks/';
 import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
-import useDarkMode from '../use-dark-mode';
 
 export default function Checklist() {
 	const { title, todos, updateTodo, removeList, resetList } = useTodos();
@@ -12,12 +11,12 @@ export default function Checklist() {
 
 	return (
 		<>
-			<h1 className="list-title">
+			<div className="list">
 				<ToggleDarkMode />
 				<Link to="/" className="list__back">
 					<ArrowBack fill="currentColor" /> All Lists
 				</Link>
-				{ title }
+				<h1 className="list__title">{ title }</h1>
 				<div className="layout layout--inline">
 					<Button variant="error.inline" onClick={ removeList }>
 						Remove
@@ -26,7 +25,7 @@ export default function Checklist() {
 						Reset All
 					</Button>
 				</div>
-			</h1>
+			</div>
 			<List>
 				{ todos.map( ( todo ) => (
 					<Todo

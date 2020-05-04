@@ -1,5 +1,5 @@
 import hash from 'js-sha1';
-
+import { Base64 } from 'js-base64';
 // https://regex101.com/r/uMDqfz/3
 // Takes a markdown H1 title and return the title alone (strips links).
 const titleRegex = /^[^\S\n\t]?#\s?\[?([\w-,;:'"^ ]+[.:?!]?)\]?.*?$/g;
@@ -19,8 +19,7 @@ const getParentId = ( todo, index, array ) => {
 };
 
 const parseList = ( file ) => {
-	const decodedLines = window
-		.atob( file.content )
+	const decodedLines = Base64.decode( file.content )
 		.split( '\n' )
 		.filter( Boolean );
 	const title =
@@ -29,6 +28,7 @@ const parseList = ( file ) => {
 			.map( ( line ) => [ ...line.matchAll( titleRegex ) ] )
 			.flat( Infinity )
 			.filter( Boolean )[ 1 ] || file.name;
+
 	const todos = decodedLines
 		.filter( ( line ) => line.match( /- \[x\]|- \[ \]|<!-- heading -->/g ) )
 		.map( ( todo, index, allTodos ) => {
@@ -46,7 +46,7 @@ const parseList = ( file ) => {
 				index, // needed to keep the sort correct.
 				id: hash( `${ todo }` ),
 				parent: getParentId( todo, index, allTodos ),
-				done: !! todo.match( /^ \[x\]/g )?.length,
+				done: !! todo.match( / \[x\]/g )?.length,
 				todoChildren: null,
 			};
 		} );

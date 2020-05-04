@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { removeList } from './list';
+import { removeList } from '../list';
 import db from 'localforage';
 const useLists = () => {
 	const [ lists, setLists ] = useState( [] );

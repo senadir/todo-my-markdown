@@ -12,7 +12,7 @@ const updateList = ( file, { title, todos, url } ) => {
 				...todo,
 				done:
 					oldTodos?.find( ( oldTodo ) => oldTodo.id === todo.id )
-						.done ?? todo.done,
+						?.done ?? todo.done,
 			};
 		} );
 		return saveList( {

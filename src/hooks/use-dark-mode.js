@@ -18,10 +18,9 @@ export default function useDarkMode() {
 		<button
 			className={ classnames( 'button button--dark-mode', className ) }
 			onClick={ () => toggleDarkMode() }
+			aria-label="Toggle light mode"
 		>
-			<span aria-label="Toggle light mode" role="img">
-				{ colorMode === 'default' ? '🌞' : '🌚' }
-			</span>
+			{ colorMode === 'default' ? '🌞' : '🌚' }
 		</button>
 	);
 	return ToggleDarkMode;

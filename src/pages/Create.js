@@ -5,11 +5,10 @@ import { useParams, useHistory, Link } from 'react-router-dom';
 import * as hash from 'js-sha1';
 import { Button, Stack } from '@nadir/components';
 
-import useAsyncError from '../use-sync-error';
+import { useAsyncError, useDarkMode } from '../hooks';
 import { isUrl, isGithub, parseUrl } from '../utils';
 import { createList, updateList, getList, parseList } from '../list';
 import { fetchFile } from '../data';
-import useDarkMode from '../use-dark-mode';
 import { ReactComponent as ArrowBack } from '../assets/svg/back.svg';
 
 export default function Create() {
@@ -57,12 +56,12 @@ export default function Create() {
 								'The file you provided has no todos in it.'
 							);
 						}
-						updateList( file, { title, todos, url: fileUrl } ).then(
-							() => {
-								history.push(
-									`/checklist/${ hash( file.path ) }`
-								);
-							}
+						updateList( file, {
+							title,
+							todos,
+							url: fileUrl,
+						} ).then( () =>
+							history.push( `/checklist/${ hash( file.path ) }` )
 						);
 					}
 				} )
@@ -73,10 +72,12 @@ export default function Create() {
 							'The file you provided has no todos in it.'
 						);
 					}
-					createList( file, { title, todos, url: fileUrl } ).then(
-						() => {
-							history.push( `/checklist/${ hash( file.path ) }` );
-						}
+					createList( file, {
+						title,
+						todos,
+						url: fileUrl,
+					} ).then( () =>
+						history.push( `/checklist/${ hash( file.path ) }` )
 					);
 				} );
 		}
@@ -105,13 +106,13 @@ export default function Create() {
 	}
 	return (
 		<Fragment>
-			<h1 className="list-title">
+			<div className="list">
 				<ToggleDarkMode />
 				<Link to="/" className="list__back">
 					<ArrowBack fill="currentColor" /> All Lists
 				</Link>
-				Create A list
-			</h1>
+				<h1 className="list__title">Create A list</h1>
+			</div>
 			<form className="create-list" onSubmit={ validateForm }>
 				<Stack direction="column" gap="normal">
 					<label htmlFor="url-input">

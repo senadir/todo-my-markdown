@@ -64,11 +64,15 @@ a:focus {
   position: relative;
 }
 
-.list-title {
+.list {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   position: relative;
+}
+
+.list__title {
+  margin: 0;
 }
 
 .list__back {

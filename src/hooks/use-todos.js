@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import db from 'localforage';
-import { prepareList, removeList } from './list';
+import { prepareList, removeList } from '../list';
 const useTodos = () => {
 	const { id: hash } = useParams();
 	const sha = useRef();

@@ -25,29 +25,31 @@ export default function Todo( {
 		);
 	}
 	return (
-		<Checkbox
-			id={ id }
-			checked={ done }
-			onChange={ ( checked ) => {
-				updateTodo( id, checked );
-			} }
-			label={ mdParser( todo ) }
-		>
-			{ todoChildren && (
-				<List
-					pl={ level > 0 ? 'normal' : 0 }
-					mt={ level > 0 ? 'normal' : 0 }
-				>
-					{ todoChildren.map( ( childTodo ) => (
-						<Todo
-							key={ childTodo.id }
-							{ ...childTodo }
-							updateTodo={ updateTodo }
-							level={ level + 1 }
-						/>
-					) ) }
-				</List>
-			) }
-		</Checkbox>
+		<li style={ { listStyle: 'none' } }>
+			<Checkbox
+				id={ id }
+				checked={ done }
+				onChange={ ( checked ) => {
+					updateTodo( id, checked );
+				} }
+				label={ mdParser( todo ) }
+			>
+				{ todoChildren && (
+					<List
+						pl={ level > 0 ? 'normal' : 0 }
+						mt={ level > 0 ? 'normal' : 0 }
+					>
+						{ todoChildren.map( ( childTodo ) => (
+							<Todo
+								key={ childTodo.id }
+								{ ...childTodo }
+								updateTodo={ updateTodo }
+								level={ level + 1 }
+							/>
+						) ) }
+					</List>
+				) }
+			</Checkbox>
+		</li>
 	);
 }
