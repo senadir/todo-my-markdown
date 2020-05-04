@@ -25,7 +25,7 @@ export default function Todo( {
 		);
 	}
 	return (
-		<li style={ { listStyle: 'none' } }>
+		<li>
 			<Checkbox
 				id={ id }
 				checked={ done }
