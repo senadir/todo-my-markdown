@@ -26,6 +26,9 @@ export default function Checkbox( { id, checked, onChange, label, children } ) {
 					code: {
 						textDecoration: checked ? 'line-through' : 'none',
 					},
+					a: {
+						textDecorationColor: checked ? 'text' : 'transparent',
+					},
 				} }
 			>
 				{ createElement( 'span', {

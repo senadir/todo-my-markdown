@@ -31,7 +31,7 @@ describe( 'parsing a file', () => {
 
 	it( 'should return the file name if no title is present', () => {
 		const { title } = parseList( fileWithNoTitle );
-		expect( title ).toEqual( 'README.md' );
+		expect( title ).toEqual( 'README' );
 	} );
 
 	it( 'should parse section headings correctly', () => {

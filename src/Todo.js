@@ -13,7 +13,14 @@ export default function Todo( {
 		str
 			.replace( /`([^`]*)`/g, '<code>$1</code>' )
 			.replace( /\*\*([^**]*)\*\*/g, '<strong>$1</strong>' ) //bold before italic
-			.replace( /\*([^*]*)\*/g, '<em>$1</em>' );
+			.replace( /\*([^*]*)\*/g, '<em>$1</em>' )
+			.replace( /_([^_]*)_/g, '<em>$1</em>' )
+			.replace( /\[(.*)\]\((.*)\)/g, '<a href="$2">$1</a>' )
+			.replace( /^##### (.*$)/g, '<h5>$1</h5>' )
+			.replace( /^#### (.*$)/g, '<h4>$1</h4>' )
+			.replace( /^### (.*$)/g, '<h3>$1</h3>' )
+			.replace( /^## (.*$)/g, '<h2>$1</h2>' )
+			.replace( /^# (.*$)/g, '<h1>$1</h1>' );
 	if ( isTitle ) {
 		return (
 			<p
