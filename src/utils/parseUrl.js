@@ -2,7 +2,7 @@ import isUrl from './is-url';
 import isGithub from './is-github';
 
 // matches any github link, will get you the org/repo, the branch or tag and the path.
-const regex = /^https?:\/\/(?:www\.)?github.com\/?([\w-]+\/[\w-]+)?(?:\/[\w-]*\/?([\w-]+)\/([\w-\/]+\.?[\w]+))?/gm;
+const regex = /^https?:\/\/(?:www\.)?github.com\/?([\w-]+\/[\w-]+)?(?:\/[\w-]*\/?([\w-]+)\/([\w-.\/]+\.?[\w]+))?/gm;
 
 const parseUrl = ( url ) => {
 	if ( ! isUrl( url ) ) {
