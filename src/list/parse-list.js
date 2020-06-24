@@ -30,7 +30,9 @@ const parseList = ( file ) => {
 			.filter( Boolean )[ 1 ] || file.name;
 
 	const todos = decodedLines
-		.filter( ( line ) => line.match( /\[x\]|\[ \]|<!-- heading -->/g ) )
+		.filter( ( line ) =>
+			line.match( /(-|\*) \[x\]|(-|\*) \[ \]|<!-- heading -->/g )
+		)
 		.map( ( todo, index, allTodos ) => {
 			if ( todo.match( /<!-- heading -->/g ) ) {
 				return {
@@ -42,7 +44,7 @@ const parseList = ( file ) => {
 				};
 			}
 			return {
-				todo: todo.replace( /\[x\]|\[ \]/g, '' ).trim(),
+				todo: todo.replace( /(-|\*) \[x\]|(-|\*) \[ \]/g, '' ).trim(),
 				index, // needed to keep the sort correct.
 				id: hash( `${ todo }` ),
 				parent: getParentId( todo, index, allTodos ),
