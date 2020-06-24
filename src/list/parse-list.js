@@ -38,7 +38,10 @@ const parseList = ( file ) => {
 		.map( ( todo, index, allTodos ) => {
 			if ( todo.match( /<!-- heading -->/g ) ) {
 				return {
-					todo: todo.replace( /<!-- heading -->/g, '' ).trim(),
+					todo: todo
+						.replace( /<!-- heading -->/g, '' )
+						.replace( /^#+ /, '' )
+						.trim(),
 					index, // needed to keep the sort correct.
 					id: hash( `${ todo }` ),
 					parent: null, // titles shouldn't have parents for now.
