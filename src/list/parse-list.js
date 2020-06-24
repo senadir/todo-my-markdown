@@ -22,12 +22,14 @@ const parseList = ( file ) => {
 	const decodedLines = Base64.decode( file.content )
 		.split( '\n' )
 		.filter( Boolean );
-	const title =
-		decodedLines
-			.filter( ( line ) => line.match( '#' ) )
+	let title =
+		decodedLines.filter( ( line ) => line.match( '#' ) ) ||
+		decodedLines.filter( ( line ) => line.match( '##' ) );
+	title =
+		title
 			.map( ( line ) => [ ...line.matchAll( titleRegex ) ] )
 			.flat( Infinity )
-			.filter( Boolean )[ 1 ] || file.name;
+			.filter( Boolean )[ 1 ] || file.name.replace( '.md', '' );
 
 	const todos = decodedLines
 		.filter( ( line ) =>
@@ -36,7 +38,10 @@ const parseList = ( file ) => {
 		.map( ( todo, index, allTodos ) => {
 			if ( todo.match( /<!-- heading -->/g ) ) {
 				return {
-					todo: todo.replace( /<!-- heading -->/g, '' ).trim(),
+					todo: todo
+						.replace( /<!-- heading -->/g, '' )
+						.replace( /^#+ /, '' )
+						.trim(),
 					index, // needed to keep the sort correct.
 					id: hash( `${ todo }` ),
 					parent: null, // titles shouldn't have parents for now.
